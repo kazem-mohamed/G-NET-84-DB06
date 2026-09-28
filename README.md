@@ -32,3 +32,5 @@ With the data in `Hospital.bak`, these queries are correct but return an empty r
 - **16** — every patient has received medication at least once.
 - **26, 44** — the highest consultant salary is 24,631, below 50,000.
 - **28** — the highest nurse salary is 9,000, below 30,000.
+
+[`Solution-Screenshots.pdf`](Solution-Screenshots.pdf) contains the whole script as page images, as a backup.
