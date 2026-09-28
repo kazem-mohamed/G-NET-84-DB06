@@ -427,3 +427,19 @@ GO
 
 SELECT dbo.CalculateAnnualSalary(15000) AS AnnualSalary;
 GO
+
+-- ------------------------------------------------------------
+-- Question 33 - Calculate Medication Cost
+-- Create a scalar function that receives quantity and unit price and returns the total
+-- medication cost.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.CalculateMedicationCost (@Quantity INT, @UnitPrice DECIMAL(10, 2))
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    RETURN @Quantity * @UnitPrice;
+END;
+GO
+
+SELECT dbo.CalculateMedicationCost(3, 12.50) AS MedicationCost;
+GO
