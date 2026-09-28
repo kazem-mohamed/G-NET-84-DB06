@@ -360,3 +360,18 @@ FROM Nurses AS n
 LEFT JOIN Wards AS w ON w.Id = n.ServesInWardId
 WHERE n.Salary > 30000;
 GO
+
+-- ------------------------------------------------------------
+-- Question 29 - Create a Ward Patient Summary
+-- Create a new table containing each ward and its patient count.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS WardPatientSummary;
+
+SELECT w.Id        AS WardId,
+       w.Name      AS WardName,
+       COUNT(p.Id) AS PatientCount
+INTO WardPatientSummary
+FROM Wards AS w
+LEFT JOIN Patients AS p ON p.WardId = w.Id
+GROUP BY w.Id, w.Name;
+GO
