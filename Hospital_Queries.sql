@@ -67,3 +67,17 @@ SELECT PatientId,
 FROM DrugAdministrations
 GROUP BY PatientId;
 GO
+
+-- ------------------------------------------------------------
+-- Question 7 - Patients per Ward with Ward Names
+-- Display every ward together with the number of patients assigned to it, including wards with
+-- no patients.
+-- COUNT(p.Id) skips the NULL row the LEFT JOIN adds for an empty ward, so it counts 0, not 1.
+-- ------------------------------------------------------------
+SELECT w.Id        AS WardId,
+       w.Name      AS WardName,
+       COUNT(p.Id) AS PatientCount
+FROM Wards AS w
+LEFT JOIN Patients AS p ON p.WardId = w.Id
+GROUP BY w.Id, w.Name;
+GO
