@@ -130,3 +130,14 @@ SELECT Id,
 FROM Consultants
 WHERE Salary > (SELECT AVG(Salary) FROM Consultants);
 GO
+
+-- ------------------------------------------------------------
+-- Question 12 - Nurses Above Average Salary
+-- Display nurses whose salary is greater than the average nurse salary.
+-- ------------------------------------------------------------
+SELECT Number,
+       Name,
+       Salary
+FROM Nurses
+WHERE Salary > (SELECT AVG(Salary) FROM Nurses);
+GO
