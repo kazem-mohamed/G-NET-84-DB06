@@ -81,3 +81,15 @@ FROM Wards AS w
 LEFT JOIN Patients AS p ON p.WardId = w.Id
 GROUP BY w.Id, w.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 8 - Average Nurse Salary per Ward
+-- Display each ward together with the average salary of nurses serving in that ward.
+-- ------------------------------------------------------------
+SELECT w.Id          AS WardId,
+       w.Name        AS WardName,
+       AVG(n.Salary) AS AverageNurseSalary
+FROM Wards AS w
+INNER JOIN Nurses AS n ON n.ServesInWardId = w.Id
+GROUP BY w.Id, w.Name;
+GO
