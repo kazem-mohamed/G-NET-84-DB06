@@ -690,3 +690,21 @@ SELECT Id,
 FROM dbo.GetPatientsWithAge(30)
 ORDER BY Age DESC, DOB;
 GO
+
+-- ------------------------------------------------------------
+-- Question 46 - Final Hospital Patient Summary
+-- Display patient ID, patient name, ward name, patient age, number of medication
+-- administrations, and total medication quantity. Use the existing tables and
+-- CalculatePatientAge.
+-- ------------------------------------------------------------
+SELECT p.Id                           AS PatientId,
+       p.Name                         AS PatientName,
+       w.Name                         AS WardName,
+       dbo.CalculatePatientAge(p.DOB) AS Age,
+       COUNT(da.PatientId)            AS AdministrationCount,
+       COALESCE(SUM(da.Quantity), 0)  AS TotalQuantity
+FROM Patients AS p
+LEFT JOIN Wards AS w ON w.Id = p.WardId
+LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name, w.Name, p.DOB;
+GO
