@@ -301,3 +301,19 @@ INTO PatientWardReport
 FROM Patients AS p
 LEFT JOIN Wards AS w ON w.Id = p.WardId;
 GO
+
+-- ------------------------------------------------------------
+-- Question 25 - Create a Patient-Consultant Report
+-- Create a new table containing patients and their assigned consultants.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS PatientConsultantReport;
+
+SELECT p.Id   AS PatientId,
+       p.Name AS PatientName,
+       c.Id   AS ConsultantId,
+       c.Name AS ConsultantName
+INTO PatientConsultantReport
+FROM PatientConsultantAssignments AS pca
+INNER JOIN Patients AS p ON p.Id = pca.PatientId
+INNER JOIN Consultants AS c ON c.Id = pca.ConsultantId;
+GO
