@@ -181,3 +181,13 @@ SELECT p.Id,
 FROM Patients AS p
 WHERE EXISTS (SELECT 1 FROM DrugAdministrations AS da WHERE da.PatientId = p.Id);
 GO
+
+-- ------------------------------------------------------------
+-- Question 16 - Patients Who Never Received Medication
+-- Display patients who have never received any medication.
+-- ------------------------------------------------------------
+SELECT p.Id,
+       p.Name
+FROM Patients AS p
+WHERE NOT EXISTS (SELECT 1 FROM DrugAdministrations AS da WHERE da.PatientId = p.Id);
+GO
