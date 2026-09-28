@@ -412,3 +412,18 @@ GO
 
 SELECT dbo.CalculatePatientAge('1990-05-15') AS Age;
 GO
+
+-- ------------------------------------------------------------
+-- Question 32 - Calculate Annual Salary
+-- Create a scalar function that receives a monthly salary and returns the annual salary.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.CalculateAnnualSalary (@MonthlySalary DECIMAL(18, 2))
+RETURNS DECIMAL(18, 2)
+AS
+BEGIN
+    RETURN @MonthlySalary * 12;
+END;
+GO
+
+SELECT dbo.CalculateAnnualSalary(15000) AS AnnualSalary;
+GO
