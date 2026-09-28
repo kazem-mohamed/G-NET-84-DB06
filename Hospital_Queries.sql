@@ -191,3 +191,15 @@ SELECT p.Id,
 FROM Patients AS p
 WHERE NOT EXISTS (SELECT 1 FROM DrugAdministrations AS da WHERE da.PatientId = p.Id);
 GO
+
+-- ------------------------------------------------------------
+-- Question 17 - Count Medication Administrations per Patient
+-- Display every patient together with the number of medication administrations they received.
+-- ------------------------------------------------------------
+SELECT p.Id                AS PatientId,
+       p.Name              AS PatientName,
+       COUNT(da.PatientId) AS AdministrationCount
+FROM Patients AS p
+LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name;
+GO
