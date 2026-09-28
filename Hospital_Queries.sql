@@ -160,3 +160,14 @@ WHERE WardId IN (
     ORDER BY COUNT(*) DESC
 );
 GO
+
+-- ------------------------------------------------------------
+-- Question 14 - Consultants with the Maximum Salary
+-- Display the consultant or consultants who have the highest salary.
+-- ------------------------------------------------------------
+SELECT Id,
+       Name,
+       Salary
+FROM Consultants
+WHERE Salary = (SELECT MAX(Salary) FROM Consultants);
+GO
