@@ -665,3 +665,15 @@ SELECT Name,
 INTO ConsultantAnnualSalaryReport
 FROM Consultants;
 GO
+
+-- ------------------------------------------------------------
+-- Question 44 - Use an Inline TVF with a Filter
+-- Using GetConsultantsByMinimumSalary, display consultants whose salary is at least 50000 and
+-- whose name starts with A.
+-- ------------------------------------------------------------
+SELECT Id,
+       Name,
+       Salary
+FROM dbo.GetConsultantsByMinimumSalary(50000)
+WHERE Name LIKE 'A%';
+GO
