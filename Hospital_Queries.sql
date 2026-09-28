@@ -465,3 +465,24 @@ GO
 
 SELECT * FROM dbo.GetPatientsByWard(1);
 GO
+
+-- ------------------------------------------------------------
+-- Question 35 - Get Consultants by Minimum Salary
+-- Create an inline table-valued function that receives a minimum salary and returns consultants
+-- whose salary is greater than or equal to it.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.GetConsultantsByMinimumSalary (@MinimumSalary DECIMAL(18, 0))
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT Id,
+           Name,
+           Salary
+    FROM Consultants
+    WHERE Salary >= @MinimumSalary
+);
+GO
+
+SELECT * FROM dbo.GetConsultantsByMinimumSalary(20000);
+GO
