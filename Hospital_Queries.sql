@@ -567,3 +567,37 @@ GO
 
 SELECT * FROM dbo.GetPatientMedicationSummary(201);
 GO
+
+-- ------------------------------------------------------------
+-- Question 39 - Classify Consultant Salaries
+-- Create a multi-statement table-valued function that receives a minimum salary and returns
+-- consultants with a salary classification.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.ClassifyConsultantSalaries (@MinimumSalary DECIMAL(18, 0))
+RETURNS @Consultants TABLE
+(
+    Id                   INT,
+    Name                 NVARCHAR(100),
+    Salary               DECIMAL(18, 0),
+    SalaryClassification NVARCHAR(20)
+)
+AS
+BEGIN
+    INSERT INTO @Consultants (Id, Name, Salary, SalaryClassification)
+    SELECT Id,
+           Name,
+           Salary,
+           CASE
+               WHEN Salary >= 20000 THEN 'High'
+               WHEN Salary >= 15000 THEN 'Medium'
+               ELSE 'Low'
+           END
+    FROM Consultants
+    WHERE Salary >= @MinimumSalary;
+
+    RETURN;
+END;
+GO
+
+SELECT * FROM dbo.ClassifyConsultantSalaries(15000);
+GO
