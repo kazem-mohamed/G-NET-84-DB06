@@ -509,3 +509,33 @@ GO
 
 SELECT * FROM dbo.GetPatientsWithWard(2);
 GO
+
+-- ------------------------------------------------------------
+-- Question 37 - Get Patients Above a Specific Age
+-- Create a multi-statement table-valued function that receives a minimum age and returns
+-- patients who are at least that age.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.GetPatientsWithAge (@MinimumAge INT)
+RETURNS @Patients TABLE
+(
+    Id   INT,
+    Name NVARCHAR(100),
+    DOB  DATE,
+    Age  INT
+)
+AS
+BEGIN
+    INSERT INTO @Patients (Id, Name, DOB, Age)
+    SELECT Id,
+           Name,
+           DOB,
+           dbo.CalculatePatientAge(DOB)
+    FROM Patients
+    WHERE dbo.CalculatePatientAge(DOB) >= @MinimumAge;
+
+    RETURN;
+END;
+GO
+
+SELECT * FROM dbo.GetPatientsWithAge(60);
+GO
