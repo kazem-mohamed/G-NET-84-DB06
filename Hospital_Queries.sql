@@ -331,3 +331,15 @@ INTO HighSalaryConsultants
 FROM Consultants
 WHERE Salary > 50000;
 GO
+
+-- ------------------------------------------------------------
+-- Question 27 - Create a Young Patients Table
+-- Create a new table containing patients born after January 1, 2000.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS YoungPatients;
+
+SELECT *
+INTO YoungPatients
+FROM Patients
+WHERE DOB > '2000-01-01';
+GO
