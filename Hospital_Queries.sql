@@ -286,3 +286,18 @@ SELECT Id,
 INTO ConsultantSalaryReport
 FROM Consultants;
 GO
+
+-- ------------------------------------------------------------
+-- Question 24 - Create a Patient-Ward Report
+-- Create a new table containing each patient together with the ward they belong to.
+-- LEFT JOIN keeps the patients who are not assigned to a ward.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS PatientWardReport;
+
+SELECT p.Id   AS PatientId,
+       p.Name AS PatientName,
+       w.Name AS WardName
+INTO PatientWardReport
+FROM Patients AS p
+LEFT JOIN Wards AS w ON w.Id = p.WardId;
+GO
