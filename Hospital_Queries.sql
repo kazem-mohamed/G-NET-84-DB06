@@ -229,3 +229,23 @@ FROM Consultants AS c
 CROSS JOIN (SELECT AVG(Salary) AS AverageSalary FROM Consultants) AS a
 WHERE c.Salary > a.AverageSalary;
 GO
+
+-- ------------------------------------------------------------
+-- Question 20 - Patients with Above-Average Medication Quantity
+-- Display patients whose total medication quantity is greater than the average total medication
+-- quantity across patients who received medication.
+-- AVG over INT values returns an INT in SQL Server, so the totals are cast to keep the decimals.
+-- ------------------------------------------------------------
+WITH PatientTotals AS (
+    SELECT PatientId,
+           SUM(Quantity) AS TotalQuantity
+    FROM DrugAdministrations
+    GROUP BY PatientId
+)
+SELECT p.Id   AS PatientId,
+       p.Name AS PatientName,
+       pt.TotalQuantity
+FROM PatientTotals AS pt
+INNER JOIN Patients AS p ON p.Id = pt.PatientId
+WHERE pt.TotalQuantity > (SELECT AVG(CAST(TotalQuantity AS DECIMAL(10, 2))) FROM PatientTotals);
+GO
