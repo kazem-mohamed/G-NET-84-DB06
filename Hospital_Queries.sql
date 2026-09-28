@@ -141,3 +141,22 @@ SELECT Number,
 FROM Nurses
 WHERE Salary > (SELECT AVG(Salary) FROM Nurses);
 GO
+
+-- ------------------------------------------------------------
+-- Question 13 - Patients in the Largest Ward
+-- Display patients who belong to the ward containing the largest number of patients.
+-- WITH TIES keeps every ward that shares the largest count, if there is a tie.
+-- ------------------------------------------------------------
+SELECT Id,
+       Name,
+       DOB,
+       WardId
+FROM Patients
+WHERE WardId IN (
+    SELECT TOP 1 WITH TIES WardId
+    FROM Patients
+    WHERE WardId IS NOT NULL
+    GROUP BY WardId
+    ORDER BY COUNT(*) DESC
+);
+GO
