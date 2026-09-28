@@ -24,3 +24,14 @@ GO
 SELECT AVG(Salary) AS AverageSalary
 FROM Consultants;
 GO
+
+-- ------------------------------------------------------------
+-- Question 3 - Display Salary Statistics for Consultants
+-- Display the minimum, maximum, average, and total consultant salaries.
+-- ------------------------------------------------------------
+SELECT MIN(Salary) AS MinimumSalary,
+       MAX(Salary) AS MaximumSalary,
+       AVG(Salary) AS AverageSalary,
+       SUM(Salary) AS TotalSalary
+FROM Consultants;
+GO
