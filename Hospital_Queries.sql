@@ -616,3 +616,23 @@ FROM Patients AS p
 LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 41 - Above-Average Wards
+-- Display wards whose patient count is greater than the average patient count across all wards.
+-- Wards with no patients count as 0, because the average is taken across all wards.
+-- ------------------------------------------------------------
+WITH WardCounts AS (
+    SELECT w.Id        AS WardId,
+           w.Name      AS WardName,
+           COUNT(p.Id) AS PatientCount
+    FROM Wards AS w
+    LEFT JOIN Patients AS p ON p.WardId = w.Id
+    GROUP BY w.Id, w.Name
+)
+SELECT WardId,
+       WardName,
+       PatientCount
+FROM WardCounts
+WHERE PatientCount > (SELECT AVG(CAST(PatientCount AS DECIMAL(10, 2))) FROM WardCounts);
+GO
