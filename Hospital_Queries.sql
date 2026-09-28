@@ -317,3 +317,17 @@ FROM PatientConsultantAssignments AS pca
 INNER JOIN Patients AS p ON p.Id = pca.PatientId
 INNER JOIN Consultants AS c ON c.Id = pca.ConsultantId;
 GO
+
+-- ------------------------------------------------------------
+-- Question 26 - Create a High-Salary Consultant Table
+-- Create a new table containing consultants whose salary is greater than 50000.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS HighSalaryConsultants;
+
+SELECT Id,
+       Name,
+       Salary
+INTO HighSalaryConsultants
+FROM Consultants
+WHERE Salary > 50000;
+GO
