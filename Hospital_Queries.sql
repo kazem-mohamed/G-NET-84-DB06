@@ -93,3 +93,16 @@ FROM Wards AS w
 INNER JOIN Nurses AS n ON n.ServesInWardId = w.Id
 GROUP BY w.Id, w.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 9 - Wards with More Than 3 Patients
+-- Display wards that have more than 3 patients.
+-- ------------------------------------------------------------
+SELECT w.Id        AS WardId,
+       w.Name      AS WardName,
+       COUNT(p.Id) AS PatientCount
+FROM Wards AS w
+INNER JOIN Patients AS p ON p.WardId = w.Id
+GROUP BY w.Id, w.Name
+HAVING COUNT(p.Id) > 3;
+GO
