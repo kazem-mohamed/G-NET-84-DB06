@@ -652,3 +652,16 @@ INNER JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name
 HAVING COUNT(*) > 5;
 GO
+
+-- ------------------------------------------------------------
+-- Question 43 - Create a Consultant Salary Report Using a Scalar Function
+-- Create a new table containing each consultant's name, monthly salary, and annual salary.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS ConsultantAnnualSalaryReport;
+
+SELECT Name,
+       Salary                            AS MonthlySalary,
+       dbo.CalculateAnnualSalary(Salary) AS AnnualSalary
+INTO ConsultantAnnualSalaryReport
+FROM Consultants;
+GO
