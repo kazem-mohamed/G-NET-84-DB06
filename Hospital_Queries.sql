@@ -249,3 +249,14 @@ FROM PatientTotals AS pt
 INNER JOIN Patients AS p ON p.Id = pt.PatientId
 WHERE pt.TotalQuantity > (SELECT AVG(CAST(TotalQuantity AS DECIMAL(10, 2))) FROM PatientTotals);
 GO
+
+-- ------------------------------------------------------------
+-- Question 21 - Create a Patient Backup
+-- Create a new table containing all patients.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS PatientsBackup;
+
+SELECT *
+INTO PatientsBackup
+FROM Patients;
+GO
