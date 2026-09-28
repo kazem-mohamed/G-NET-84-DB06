@@ -443,3 +443,25 @@ GO
 
 SELECT dbo.CalculateMedicationCost(3, 12.50) AS MedicationCost;
 GO
+
+-- ------------------------------------------------------------
+-- Question 34 - Get Patients by Ward
+-- Create an inline table-valued function that receives a ward ID and returns all patients in
+-- that ward.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.GetPatientsByWard (@WardId INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT Id,
+           Name,
+           DOB,
+           WardId
+    FROM Patients
+    WHERE WardId = @WardId
+);
+GO
+
+SELECT * FROM dbo.GetPatientsByWard(1);
+GO
