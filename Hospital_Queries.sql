@@ -343,3 +343,20 @@ INTO YoungPatients
 FROM Patients
 WHERE DOB > '2000-01-01';
 GO
+
+-- ------------------------------------------------------------
+-- Question 28 - Create a High-Salary Nurse Report
+-- Create a new table containing nurses earning more than 30000 together with the ward they serve
+-- in.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS HighSalaryNurses;
+
+SELECT n.Number,
+       n.Name,
+       n.Salary,
+       w.Name AS WardName
+INTO HighSalaryNurses
+FROM Nurses AS n
+LEFT JOIN Wards AS w ON w.Id = n.ServesInWardId
+WHERE n.Salary > 30000;
+GO
