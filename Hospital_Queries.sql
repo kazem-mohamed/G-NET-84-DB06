@@ -215,3 +215,17 @@ FROM Patients AS p
 LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 19 - Derived Table for Consultant Salaries
+-- Create a derived table containing the average consultant salary, then display consultants
+-- whose salary is above that average.
+-- ------------------------------------------------------------
+SELECT c.Id,
+       c.Name,
+       c.Salary,
+       a.AverageSalary
+FROM Consultants AS c
+CROSS JOIN (SELECT AVG(Salary) AS AverageSalary FROM Consultants) AS a
+WHERE c.Salary > a.AverageSalary;
+GO
