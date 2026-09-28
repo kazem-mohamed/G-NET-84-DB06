@@ -35,3 +35,15 @@ SELECT MIN(Salary) AS MinimumSalary,
        SUM(Salary) AS TotalSalary
 FROM Consultants;
 GO
+
+-- ------------------------------------------------------------
+-- Question 4 - Count Patients by Ward
+-- Display the ward ID and number of patients in each ward, sorted from highest to lowest.
+-- ------------------------------------------------------------
+SELECT WardId,
+       COUNT(*) AS PatientCount
+FROM Patients
+WHERE WardId IS NOT NULL
+GROUP BY WardId
+ORDER BY PatientCount DESC;
+GO
