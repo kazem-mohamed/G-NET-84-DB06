@@ -375,3 +375,18 @@ FROM Wards AS w
 LEFT JOIN Patients AS p ON p.WardId = w.Id
 GROUP BY w.Id, w.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 30 - Create a Patient Medication Summary
+-- Create a new table containing each patient and their total medication quantity.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS PatientMedicationSummary;
+
+SELECT p.Id                          AS PatientId,
+       p.Name                        AS PatientName,
+       COALESCE(SUM(da.Quantity), 0) AS TotalQuantity
+INTO PatientMedicationSummary
+FROM Patients AS p
+LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name;
+GO
