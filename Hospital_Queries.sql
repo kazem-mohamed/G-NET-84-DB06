@@ -203,3 +203,15 @@ FROM Patients AS p
 LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 18 - Total Medication Quantity per Patient
+-- Display every patient together with the total medication quantity administered to them.
+-- ------------------------------------------------------------
+SELECT p.Id                          AS PatientId,
+       p.Name                        AS PatientName,
+       COALESCE(SUM(da.Quantity), 0) AS TotalQuantity
+FROM Patients AS p
+LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name;
+GO
