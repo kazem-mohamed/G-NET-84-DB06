@@ -106,3 +106,16 @@ INNER JOIN Patients AS p ON p.WardId = w.Id
 GROUP BY w.Id, w.Name
 HAVING COUNT(p.Id) > 3;
 GO
+
+-- ------------------------------------------------------------
+-- Question 10 - Patients with More Than 5 Medication Administrations
+-- Display patients who received medication more than 5 times.
+-- ------------------------------------------------------------
+SELECT p.Id     AS PatientId,
+       p.Name   AS PatientName,
+       COUNT(*) AS AdministrationCount
+FROM Patients AS p
+INNER JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name
+HAVING COUNT(*) > 5;
+GO
