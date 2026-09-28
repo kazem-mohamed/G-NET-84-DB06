@@ -486,3 +486,26 @@ GO
 
 SELECT * FROM dbo.GetConsultantsByMinimumSalary(20000);
 GO
+
+-- ------------------------------------------------------------
+-- Question 36 - Get Patients with Their Ward
+-- Create an inline table-valued function that receives a ward ID and returns patients together
+-- with their ward name.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.GetPatientsWithWard (@WardId INT)
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT p.Id,
+           p.Name,
+           p.DOB,
+           w.Name AS WardName
+    FROM Patients AS p
+    INNER JOIN Wards AS w ON w.Id = p.WardId
+    WHERE p.WardId = @WardId
+);
+GO
+
+SELECT * FROM dbo.GetPatientsWithWard(2);
+GO
