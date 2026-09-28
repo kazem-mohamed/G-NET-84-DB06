@@ -47,3 +47,13 @@ WHERE WardId IS NOT NULL
 GROUP BY WardId
 ORDER BY PatientCount DESC;
 GO
+
+-- ------------------------------------------------------------
+-- Question 5 - Medication Quantity per Patient
+-- Display the total medication quantity administered to each patient.
+-- ------------------------------------------------------------
+SELECT PatientId,
+       SUM(Quantity) AS TotalQuantity
+FROM DrugAdministrations
+GROUP BY PatientId;
+GO
