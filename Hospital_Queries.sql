@@ -636,3 +636,19 @@ SELECT WardId,
 FROM WardCounts
 WHERE PatientCount > (SELECT AVG(CAST(PatientCount AS DECIMAL(10, 2))) FROM WardCounts);
 GO
+
+-- ------------------------------------------------------------
+-- Question 42 - Create a High-Activity Patient Report
+-- Create a new table containing patients who received medication more than 5 times.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS HighActivityPatients;
+
+SELECT p.Id     AS PatientId,
+       p.Name   AS PatientName,
+       COUNT(*) AS AdministrationCount
+INTO HighActivityPatients
+FROM Patients AS p
+INNER JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name
+HAVING COUNT(*) > 5;
+GO
