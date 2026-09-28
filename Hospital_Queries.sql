@@ -539,3 +539,31 @@ GO
 
 SELECT * FROM dbo.GetPatientsWithAge(60);
 GO
+
+-- ------------------------------------------------------------
+-- Question 38 - Get Patient Medication Summary
+-- Create a multi-statement table-valued function that receives a patient ID and returns the
+-- total medication quantity and number of medication administrations.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.GetPatientMedicationSummary (@PatientId INT)
+RETURNS @Summary TABLE
+(
+    PatientId           INT,
+    TotalQuantity       INT,
+    AdministrationCount INT
+)
+AS
+BEGIN
+    INSERT INTO @Summary (PatientId, TotalQuantity, AdministrationCount)
+    SELECT @PatientId,
+           COALESCE(SUM(Quantity), 0),
+           COUNT(*)
+    FROM DrugAdministrations
+    WHERE PatientId = @PatientId;
+
+    RETURN;
+END;
+GO
+
+SELECT * FROM dbo.GetPatientMedicationSummary(201);
+GO
