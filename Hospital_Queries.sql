@@ -601,3 +601,18 @@ GO
 
 SELECT * FROM dbo.ClassifyConsultantSalaries(15000);
 GO
+
+-- ------------------------------------------------------------
+-- Question 40 - Patient Medication Statistics
+-- Display each patient together with their number of medication administrations, total
+-- medication quantity, and average medication quantity.
+-- ------------------------------------------------------------
+SELECT p.Id                                     AS PatientId,
+       p.Name                                   AS PatientName,
+       COUNT(da.PatientId)                      AS AdministrationCount,
+       COALESCE(SUM(da.Quantity), 0)            AS TotalQuantity,
+       AVG(CAST(da.Quantity AS DECIMAL(10, 2))) AS AverageQuantity
+FROM Patients AS p
+LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
+GROUP BY p.Id, p.Name;
+GO
