@@ -260,3 +260,16 @@ SELECT *
 INTO PatientsBackup
 FROM Patients;
 GO
+
+-- ------------------------------------------------------------
+-- Question 22 - Create a Basic Patient Information Table
+-- Create a new table containing only patient ID, name, and date of birth.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS PatientBasicInfo;
+
+SELECT Id,
+       Name,
+       DOB
+INTO PatientBasicInfo
+FROM Patients;
+GO
