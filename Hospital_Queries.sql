@@ -119,3 +119,14 @@ INNER JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name
 HAVING COUNT(*) > 5;
 GO
+
+-- ------------------------------------------------------------
+-- Question 11 - Consultants Above Average Salary
+-- Display consultants whose salary is greater than the average consultant salary.
+-- ------------------------------------------------------------
+SELECT Id,
+       Name,
+       Salary
+FROM Consultants
+WHERE Salary > (SELECT AVG(Salary) FROM Consultants);
+GO
