@@ -171,3 +171,13 @@ SELECT Id,
 FROM Consultants
 WHERE Salary = (SELECT MAX(Salary) FROM Consultants);
 GO
+
+-- ------------------------------------------------------------
+-- Question 15 - Patients Who Received Medication
+-- Display patients who have at least one medication administration.
+-- ------------------------------------------------------------
+SELECT p.Id,
+       p.Name
+FROM Patients AS p
+WHERE EXISTS (SELECT 1 FROM DrugAdministrations AS da WHERE da.PatientId = p.Id);
+GO
