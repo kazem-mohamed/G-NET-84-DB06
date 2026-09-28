@@ -390,3 +390,25 @@ FROM Patients AS p
 LEFT JOIN DrugAdministrations AS da ON da.PatientId = p.Id
 GROUP BY p.Id, p.Name;
 GO
+
+-- ------------------------------------------------------------
+-- Question 31 - Calculate Patient Age
+-- Create a scalar function that receives a date of birth and returns the patient's age.
+-- One year is taken off when this year's birthday has not arrived yet,
+-- because DATEDIFF(YEAR, ...) only compares the year parts.
+-- ------------------------------------------------------------
+CREATE OR ALTER FUNCTION dbo.CalculatePatientAge (@DateOfBirth DATE)
+RETURNS INT
+AS
+BEGIN
+    RETURN DATEDIFF(YEAR, @DateOfBirth, GETDATE())
+         - CASE
+               WHEN DATEADD(YEAR, DATEDIFF(YEAR, @DateOfBirth, GETDATE()), @DateOfBirth) > CAST(GETDATE() AS DATE)
+               THEN 1
+               ELSE 0
+           END;
+END;
+GO
+
+SELECT dbo.CalculatePatientAge('1990-05-15') AS Age;
+GO
