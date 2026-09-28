@@ -16,3 +16,11 @@ FROM Patients
 WHERE WardId IS NOT NULL
 GROUP BY WardId;
 GO
+
+-- ------------------------------------------------------------
+-- Question 2 - Calculate the Average Consultant Salary
+-- Display the average salary of all consultants.
+-- ------------------------------------------------------------
+SELECT AVG(Salary) AS AverageSalary
+FROM Consultants;
+GO
