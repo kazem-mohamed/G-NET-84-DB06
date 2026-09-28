@@ -273,3 +273,16 @@ SELECT Id,
 INTO PatientBasicInfo
 FROM Patients;
 GO
+
+-- ------------------------------------------------------------
+-- Question 23 - Create a Consultant Salary Report
+-- Create a new table containing consultant ID, name, and salary.
+-- ------------------------------------------------------------
+DROP TABLE IF EXISTS ConsultantSalaryReport;
+
+SELECT Id,
+       Name,
+       Salary
+INTO ConsultantSalaryReport
+FROM Consultants;
+GO
