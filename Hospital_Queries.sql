@@ -57,3 +57,13 @@ SELECT PatientId,
 FROM DrugAdministrations
 GROUP BY PatientId;
 GO
+
+-- ------------------------------------------------------------
+-- Question 6 - Medication Administrations per Patient
+-- Display each patient ID together with the number of medication administrations they received.
+-- ------------------------------------------------------------
+SELECT PatientId,
+       COUNT(*) AS AdministrationCount
+FROM DrugAdministrations
+GROUP BY PatientId;
+GO
