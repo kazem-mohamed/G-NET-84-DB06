@@ -677,3 +677,16 @@ SELECT Id,
 FROM dbo.GetConsultantsByMinimumSalary(50000)
 WHERE Name LIKE 'A%';
 GO
+
+-- ------------------------------------------------------------
+-- Question 45 - Use a Multi-Statement TVF
+-- Using GetPatientsWithAge, display patients who are at least 30 years old and order them from
+-- oldest to youngest.
+-- ------------------------------------------------------------
+SELECT Id,
+       Name,
+       DOB,
+       Age
+FROM dbo.GetPatientsWithAge(30)
+ORDER BY Age DESC, DOB;
+GO
